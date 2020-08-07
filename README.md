@@ -1,5 +1,6 @@
 # demo
-spring boot+jwt+hibernate valid+mybatis plus+dubbo + 权限检验 的小demo
+
+spring boot + jwt 登陆验证 + hibernate valid + mybatis plus + dubbo + aop 权限检验 
 
 
 # 准备
