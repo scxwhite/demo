@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+
+# dubbo端口配置
+dubbo:
+  address: localhost:2181
+
+
+# mybatis 逻辑删除
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-not-delete-value: 1
+      logic-delete-value: 0
+# 启动端口
+server:
+  port: 8080
+
+# 3猫开发环境 根据java启动参数-Dspring.profiles.active=dev指定
+logging:
+  level:
+    root: info
+  file:
+    path: /tmp/
+
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/three_cat
+    password: moye
+
+
+
+# 生产环境  根据java启动参数-Dspring.profiles.active=pro指定
+---
+spring:
+  profiles: pro
+  datasource:
+    url: jdbc:mysql://192.168.1.1:3306/three_cat
+    password: threeCat
+dobbo:
+  address: 192.168.1.1:2020

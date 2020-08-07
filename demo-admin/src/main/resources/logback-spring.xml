@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <jmxConfigurator/>
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{32}.%M:%L %msg%n%xException%n"/>
+
+    <!--application.yml 传递参数，不能使用logback 自带的<property>标签 -->
+    <springProperty scope="context" name="logPath" source="logging.file.path"/>
+    <springProperty scope="context" name="logLevel" source="logging.allLevel"/>
+    <springProperty scope="context" name="immediateFlush" source="logging.immediate.flush"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <immediateFlush>${immediateFlush}</immediateFlush>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="all" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/info.log</file>
+        <Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/bak/info.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <!-- keep 10 days worth of history -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <immediateFlush>${immediateFlush}</immediateFlush>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+
+
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/error.log</file>
+        <Append>true</Append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logPath}/bak/error.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+            <!-- keep 10 days worth of history -->
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${PATTERN}</pattern>
+            <immediateFlush>${immediateFlush}</immediateFlush>
+        </encoder>
+    </appender>
+
+
+
+
+    <!--控制台打印资源加载信息-->
+    <root>
+        <level value="${logLevel}"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="all"/>
+    </root>
+
+    <logger name="com.thrcat.logs.ErrorLog" additivity="true">
+        <level value="ERROR"/>
+        <appender-ref ref="errorLog"/>
+    </logger>
+
+
+
+</configuration>
