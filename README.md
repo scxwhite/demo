@@ -5,7 +5,9 @@ spring boot + jwt 登陆验证 + hibernate valid + mybatis plus + dubbo + aop �
 
 # 准备
 1.安装mysql执行 demo/demo-admin/src/main/resources/demo.sql 进行建表
+
 2.安装zookeeper启动，地址可以在demo/demo-admin/src/main/resources/application.yml 修改
+
 3.启动项目 com/thrcat/DemoApplication.java
 
 
