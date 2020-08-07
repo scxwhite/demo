@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 /**
- * desc:
- *
  * @author scx
- * @create 2020/03/20
  */
 public abstract class BaseController {
 

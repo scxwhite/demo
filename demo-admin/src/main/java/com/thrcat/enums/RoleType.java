@@ -1,7 +1,7 @@
 package com.thrcat.enums;
 
 /**
- * desc:
+ * desc: 角色类型
  *
  * @author scx
  * @create 2020/08/07
@@ -9,5 +9,4 @@ package com.thrcat.enums;
 public enum RoleType {
 
     SUPER_ADMIN, MANAGER, USER
-
 }
